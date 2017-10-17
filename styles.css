@@ -5,7 +5,8 @@ body{
   margin: 0px;
   background-color: #444;
   background-image: url("img/sky.jpeg");
-  background-size: contain;
+  background-size: cover;
+background-repeat: no-repeat;
   font-size: 18px;
   overflow: hidden;
 }
@@ -63,11 +64,11 @@ body, a:link, a:visited, a:active{
   background-size: contain;
   background-repeat: no-repeat; 
   animation-name: buzz;
-  animation-duration: 3s;
+  animation-duration: 1.5s;
   animation-iteration-count: infinite;
 }
 .zoom{
-  border-size:10px;
+  border-size:200px;
   animation-name: zoom;
   animation-direction: alternate;
   animation-duration: 1s;
@@ -76,12 +77,12 @@ body, a:link, a:visited, a:active{
 
 @keyframes zoom {
   0% {
-    transform: scale(.5);
+    transform: scale(1);
     border-color: white;
   }
   100% {
-    transform: scale(1.5);
-    border-color: red;
+    transform: scale(3);
+    border-color: orange;
   }
 }
 
@@ -95,22 +96,22 @@ body, a:link, a:visited, a:active{
 }
 
 @keyframes buzz {
-  0% {
-    left: 0%;
+0% {
+    margin-left: 0;
     transform: rotateY(0deg);
   }
   49% {
     transform: rotateY(0deg);
   }
   50% {
-    left: 90%;
+    margin-left: 150px;
     transform: rotateY(180deg);
   }
   99% {
     transform: rotateY(180deg);
   }
   100% {
-    left: 0%;
+    margin-left: 0px;
     transform: rotateY(0deg);
   }
 }
