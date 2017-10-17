@@ -13,7 +13,7 @@ background-repeat: no-repeat;
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
-.title, .addDancerButton{
+.title, .addDancerButton, #lineUpButton{
   padding:5px 12px;
   float:right;
 }
@@ -29,20 +29,31 @@ body, a:link, a:visited, a:active{
   bottom: 0px;
   z-index: 999;
 }
+.center{
+  transform: translate(-50%, -50%);
+}
 .dancer{
   border:10px solid red;
   border-radius:10px;
   position:absolute;
 }
+
+.dancer div {
+  position: relative;
+}
 .slide{
-  border:15px solid yellow;
-  border-radius:15px;
-  transition-duration: 250ms;
+  border: none;
+  height: 50px;
+  width: 70px;
+  transform: scale(-8, 8);
+  background-image: url("img/walkingElephant.gif");
+  background-size: contain;
+  background-repeat: no-repeat; 
 }
 .bounce{
-  border:13px solid green;
-  border-radius:12px;
   transition-duration: 250ms;
+  border: 0px solid white;
+  transform: scale(0.1);
 }
 .allen{
   border: none;
@@ -68,11 +79,48 @@ body, a:link, a:visited, a:active{
   animation-iteration-count: infinite;
 }
 .zoom{
-  border-size:200px;
+  height: 100px;
+  width: 70px;
+  border: none;
+  background-image: url("img/balloon.png");
+  background-size: contain;
+  background-repeat: no-repeat; 
   animation-name: zoom;
   animation-direction: alternate;
-  animation-duration: 1s;
+  animation-duration: 5s;
   animation-iteration-count: infinite;
+}
+
+
+
+.rotator {
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  padding: 10px 10px;
+  animation: rotation 500ms linear infinite;
+}
+
+.outer {
+  background-color: blue;
+}
+
+.inner {
+  background-color: orange;
+  width: 100px;
+  height: 100px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes zoom {
@@ -112,6 +160,24 @@ body, a:link, a:visited, a:active{
   }
   100% {
     margin-left: 0px;
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes buzzStill {
+0% {
+    transform: rotateY(0deg);
+  }
+  49% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  99% {
+    transform: rotateY(180deg);
+  }
+  100% {
     transform: rotateY(0deg);
   }
 }
