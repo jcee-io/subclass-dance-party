@@ -58,11 +58,15 @@ $(document).ready(function() {
     $(this).css("animation-play-state", "running");
   });
 
+  // $('body').on(
+  //   'transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd',
+  //   '.explosion', function() { $(this).remove(); }
+  // );
+
   var getDistance = function(dancer1, dancer2) {
     //console.log(dancerPositions[dancer1.idx]);
     var horizSep = parseInt(dancer1.$node.css("left")) - parseInt(dancer2.$node.css("left"));
     var vertSep = parseInt(dancer1.$node.css("top")) - parseInt(dancer2.$node.css("top"));
-    console.log(Math.sqrt(Math.pow(horizSep, 2) + Math.pow(vertSep, 2)));
     return Math.sqrt(Math.pow(horizSep, 2) + Math.pow(vertSep, 2));
   };
 
@@ -72,14 +76,21 @@ $(document).ready(function() {
         if (i !== j) {
           var dancer1 = window.dancers[i];
           var dancer2 = window.dancers[j];
-          if (getDistance(dancer1, dancer2) < 100) {
-            console.log('COLLISION!!!!!11111111');
-            
-            dancer1.$node.css("top", "-=100");
-            setTimeout(function(){
-              dancer1.$node.css("animation-name", "slide");
-            }, 1000);
-  
+          if (getDistance(dancer1, dancer2) < 50) {
+            // console.log('COLLISION!!!!!11111111');
+            // dancer1.$node.css("top", "-=100");
+            // setTimeout(function(){
+            //   dancer1.$node.css("animation-name", "slide");
+            // }, 1000);
+            dancer1.$node.removeClass("slide");
+            dancer1.$node.addClass("explosion");
+            dancer2.$node.removeClass("slide");
+            dancer2.$node.addClass("explosion");
+
+            // dancer1.$node.removeClass("dancer");
+            // dancer2.$node.removeClass("dancer");
+            window.dancers.splice(window.dancers.indexOf(dancer1), 1);
+            window.dancers.splice(window.dancers.indexOf(dancer2), 1);
           }
         }
       }
@@ -87,6 +98,9 @@ $(document).ready(function() {
   };
   
   setInterval(checkAllDistances, 10);
+  setInterval(function() {
+    $('.explosion').remove();
+  }, 600);
   
 
 });

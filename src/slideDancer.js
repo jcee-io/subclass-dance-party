@@ -22,7 +22,7 @@ makeFly.prototype.lineUp = function() {
 };
 
 var makeAllen = function(top, left, timeBetweenSteps) {
-  makeDancer.call(this, $("body").height() * 0.8, left, timeBetweenSteps);
+  makeDancer.call(this, $("body").height() - 160, left, timeBetweenSteps);
   this.$node.addClass("allen");
 };
 makeAllen.prototype = Object.create(makeDancer.prototype);
@@ -41,6 +41,17 @@ makeZoomDancer.prototype.constructor = makeZoomDancer;
 makeZoomDancer.prototype.step = function() {
   makeDancer.prototype.step.call(this);
 };
+makeZoomDancer.prototype.lineUp = function() {
+  //this.$node.addClass("center");
+  if (!this.linedUp) {
+    this.setPosition(100, this.$node.position.bottom);
+    this.linedUp = true;
+  } else {
+    var oldPosition = window.dancerPositions[this.idx];
+    this.setPosition(oldPosition.top, oldPosition.left);
+    this.linedUp = false;
+  }
+};
 
 var makeSlideDancer = function(top, left, timeBetweenSteps) {
   makeDancer.call(this, $(window).height() * 0.7, left, timeBetweenSteps);
@@ -56,14 +67,12 @@ makeSlideDancer.prototype.step = function() {
     this.$node.css("left", "-20px");
   }
   this.$node.css("left", "+=10");
-
-
 };
 
 
 var makeFallingDancer = function(top, left, timeBetweenSteps) {
-  makeDancer.call(this, top, left, timeBetweenSteps);
-  this.$node.addClass("slide");
+  makeDancer.call(this, $(window).height() * 0.01, left, timeBetweenSteps);
+  // this.$node.addClass("slide");
 };
 makeFallingDancer.prototype = Object.create(makeDancer.prototype);
 makeFallingDancer.prototype.constructor = makeFallingDancer;
